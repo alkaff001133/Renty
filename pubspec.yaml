@@ -72,6 +72,14 @@ flutter:
     - assets/images/register_screen/register2.png
     - assets/images/register_screen/register3.png
     - assets/images/splash/logo.png
+    - assets/images/Cover 1.png
+    - assets/images/GooglePay.png
+    - assets/images/Group_map 216 (2).png
+    - assets/images/Mastercard.png
+    - assets/images/Mercedes.png
+    - assets/images/PayPal.png
+    - assets/images/profile_pic.png
+    - assets/images/Visa.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images
