@@ -1,3 +1,7 @@
+import 'package:final_project/screens/favorites.dart';
+import 'package:final_project/screens/home_page.dart';
+import 'package:final_project/screens/notafcation.dart';
+import 'package:final_project/screens/profile_page.dart';
 import 'package:flutter/material.dart';
 import 'booking_review_page.dart';
 
@@ -155,10 +159,10 @@ class PaymentDetailsPage extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: [
-        _buildPaymentLogo('images/PayPal.png'),
-        _buildPaymentLogo('images/GooglePay.png'),
-        _buildPaymentLogo('images/Mastercard.png'),
-        _buildPaymentLogo('images/Visa.png'),
+        _buildPaymentLogo('assets/images/PayPal.png'),
+        _buildPaymentLogo('assets/images/GooglePay.png'),
+        _buildPaymentLogo('assets/images/Mastercard.png'),
+        _buildPaymentLogo('assets/images/Visa.png'),
       ],
     );
   }
@@ -177,25 +181,6 @@ class PaymentDetailsPage extends StatelessWidget {
   }
 
 
-  void _onItemTapped(BuildContext context, int index) {
-    switch (index) {
-      case 0:
-
-        if (ModalRoute.of(context)?.settings.name != '/') {
-          Navigator.pushNamedAndRemoveUntil(context, '/', (route) => false);
-        }
-        break;
-      case 1:
-        break;
-      case 2:
-        break;
-      case 3:
-        if (ModalRoute.of(context)?.settings.name != '/profile') {
-          Navigator.pushNamed(context, '/profile');
-        }
-        break;
-    }
-  }
 
   Widget _buildBottomNavBar(BuildContext context, int currentIndex) {
     return Container(
@@ -236,9 +221,35 @@ class PaymentDetailsPage extends StatelessWidget {
             icon: Icon(Icons.person_outline),
             label: 'Profile',
           ),
-        ],
-        onTap: (index) {
-          _onItemTapped(context, index);
+        ],onTap: (value) {
+          switch(value) {
+            case 0:
+              Navigator.push(context, MaterialPageRoute(builder: (context)=> HomePage()));
+              break;
+            case 1:
+              // زر Notifications
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => const NotificationsPage()),
+              );
+              break;
+            case 2:
+              // زر Favorites
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => const FavoritesPage()),
+              );
+              break;
+            case 3:
+              // زر Profile
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => ProfilePage()),
+              );
+              break;
+          }
         },
       ),
     );

@@ -1,27 +1,25 @@
+import 'package:final_project/screens/home_page.dart';
 import 'package:flutter/material.dart';
 
 class PaymentSuccessPage extends StatelessWidget {
   @override
   Widget build(BuildContext buildContext) {
     return Scaffold(
+      backgroundColor: Colors.black,
+      appBar: AppBar(
         backgroundColor: Colors.black,
-        appBar: AppBar(
-            backgroundColor: Colors.black,
-            elevation: 0,
-            title: Text(
-              'Payment',
-              style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
-            ),
-            centerTitle: true,
+        elevation: 0,
+        title: Text(
+          'Payment',
+          style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+        ),
+        centerTitle: true,
         bottom: PreferredSize(
           preferredSize: Size.fromHeight(1.0),
-          child: Divider(
-            color: Colors.white.withOpacity(0.2),
-            height: 1.0,
-          ),
+          child: Divider(color: Colors.white.withOpacity(0.2), height: 1.0),
         ),
-    ),
-    body: Center(
+      ),
+      body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
@@ -31,11 +29,7 @@ class PaymentSuccessPage extends StatelessWidget {
                 color: Color(0xFF0083A7),
                 shape: BoxShape.circle,
               ),
-              child: Icon(
-                Icons.check,
-                color: Colors.white,
-                size: 80,
-              ),
+              child: Icon(Icons.check, color: Colors.white, size: 80),
             ),
             SizedBox(height: 30),
             Text(
@@ -50,9 +44,12 @@ class PaymentSuccessPage extends StatelessWidget {
             SizedBox(height: 80),
             ElevatedButton(
               onPressed: () {
-
                 // );
-                print('Navigate to Home');
+                Navigator.pushAndRemoveUntil(
+                  buildContext,
+                  MaterialPageRoute(builder: (context) => HomePage()),
+                  (rout) => rout.isFirst,
+                );
               },
               style: ElevatedButton.styleFrom(
                 backgroundColor: Color(0xFF0083A7),

@@ -1,3 +1,8 @@
+import 'package:final_project/screens/car_rental_summary_page.dart';
+import 'package:final_project/screens/favorites.dart';
+import 'package:final_project/screens/home_page.dart';
+import 'package:final_project/screens/notafcation.dart';
+import 'package:final_project/screens/profile_page.dart';
 import 'package:flutter/material.dart';
 
 class CarRentalMapDetailsPage extends StatelessWidget {
@@ -12,7 +17,7 @@ class CarRentalMapDetailsPage extends StatelessWidget {
             child: Stack(
               children: [
                 Image.asset(
-                  'images/Group_map 216 (2).png',
+                  'assets/images/Group_map 216 (2).png',
                   fit: BoxFit.cover,
                   width: double.infinity,
                 ),
@@ -69,7 +74,7 @@ class CarRentalMapDetailsPage extends StatelessWidget {
                         style: TextStyle(
                           fontSize: 18,
                           fontWeight: FontWeight.bold,
-                          color: Colors.white
+                          color: Colors.white,
                         ),
                       ),
                       Text(
@@ -104,20 +109,24 @@ class CarRentalMapDetailsPage extends StatelessWidget {
                     ),
                     child: Row(
                       children: [
-                        Icon(Icons.favorite_border, size: 24, color: Colors.white,),
+                        Icon(
+                          Icons.favorite_border,
+                          size: 24,
+                          color: Colors.white,
+                        ),
                         SizedBox(width: 10),
                         Text(
                           'New listing',
-                          style: TextStyle(fontWeight: FontWeight.bold,
-                            color: Colors.white
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white,
                           ),
-
                         ),
                         Spacer(),
                         ClipRRect(
                           borderRadius: BorderRadius.circular(8),
                           child: Image.asset(
-                            'images/Mercedes.png',
+                            'assets/images/Mercedes.png',
                             width: 130,
                             height: 50,
                             fit: BoxFit.cover,
@@ -129,10 +138,7 @@ class CarRentalMapDetailsPage extends StatelessWidget {
                   SizedBox(height: 20),
                   Text(
                     'Features',
-                    style: TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold,
-                    ),
+                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                   ),
                   SizedBox(height: 10),
                   Row(
@@ -165,12 +171,16 @@ class CarRentalMapDetailsPage extends StatelessWidget {
                         Text(
                           '\$10',
                           style: TextStyle(
-                              fontSize: 16, fontWeight: FontWeight.bold),
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
                         Text(
                           'day discount -3',
                           style: TextStyle(
-                              fontSize: 14, color: Colors.grey[600]),
+                            fontSize: 14,
+                            color: Colors.grey[600],
+                          ),
                         ),
                       ],
                     ),
@@ -179,14 +189,22 @@ class CarRentalMapDetailsPage extends StatelessWidget {
                   Center(
                     child: ElevatedButton(
                       onPressed: () {
-                        Navigator.pushNamed(context, '/summary');
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => CarRentalSummaryPage(),
+                          ),
+                        );
                       },
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Color(0xFF0083A7),
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(10),
                         ),
-                        padding: EdgeInsets.symmetric(horizontal: 50, vertical: 15),
+                        padding: EdgeInsets.symmetric(
+                          horizontal: 50,
+                          vertical: 15,
+                        ),
                       ),
                       child: Text(
                         'Book for \$12.75/h',
@@ -208,7 +226,12 @@ class CarRentalMapDetailsPage extends StatelessWidget {
     );
   }
 
-  Widget _buildFeatureCard(BuildContext context, {required IconData icon, required String title, required String subtitle}) {
+  Widget _buildFeatureCard(
+    BuildContext context, {
+    required IconData icon,
+    required String title,
+    required String subtitle,
+  }) {
     return Expanded(
       child: Container(
         padding: EdgeInsets.all(12),
@@ -221,10 +244,7 @@ class CarRentalMapDetailsPage extends StatelessWidget {
           children: [
             Icon(icon, color: Colors.grey),
             SizedBox(height: 5),
-            Text(
-              title,
-              style: TextStyle(fontWeight: FontWeight.bold),
-            ),
+            Text(title, style: TextStyle(fontWeight: FontWeight.bold)),
             Text(
               subtitle,
               style: TextStyle(fontSize: 12, color: Colors.grey[600]),
@@ -256,7 +276,36 @@ class CarRentalMapDetailsPage extends StatelessWidget {
         showUnselectedLabels: false,
         type: BottomNavigationBarType.fixed,
         backgroundColor: Colors.transparent,
-        elevation: 0,
+        elevation: 0,onTap: (value) {
+          switch(value) {
+            case 0:
+              Navigator.push(context, MaterialPageRoute(builder: (context)=> HomePage()));
+              break;
+            case 1:
+              // زر Notifications
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => const NotificationsPage()),
+              );
+              break;
+            case 2:
+              // زر Favorites
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => const FavoritesPage()),
+              );
+              break;
+            case 3:
+              // زر Profile
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => ProfilePage()),
+              );
+              break;
+          }
+        },
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
             icon: Icon(Icons.home_outlined),
@@ -275,8 +324,6 @@ class CarRentalMapDetailsPage extends StatelessWidget {
             label: 'Profile',
           ),
         ],
-        onTap: (index) {
-        },
       ),
     );
   }

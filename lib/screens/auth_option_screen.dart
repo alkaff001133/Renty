@@ -17,6 +17,7 @@ class AuthOptionScreen extends StatelessWidget {
             fit: BoxFit.cover,
 
 
+            // ignore: deprecated_member_use
             color: Colors.black.withOpacity(0.4),
             colorBlendMode: BlendMode.darken,
           ),

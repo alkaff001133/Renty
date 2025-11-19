@@ -1,3 +1,7 @@
+import 'package:final_project/screens/favorites.dart';
+import 'package:final_project/screens/home_page.dart';
+import 'package:final_project/screens/notafcation.dart';
+import 'package:final_project/screens/profile_page.dart';
 import 'package:flutter/material.dart';
 import 'payment_success_page.dart';
 
@@ -172,7 +176,36 @@ class BookingReviewPage extends StatelessWidget {
         showUnselectedLabels: false,
         type: BottomNavigationBarType.fixed,
         backgroundColor: Colors.transparent,
-        elevation: 0,
+        elevation: 0,onTap: (value) {
+          switch(value) {
+            case 0:
+              Navigator.push(context, MaterialPageRoute(builder: (context)=> HomePage()));
+              break;
+            case 1:
+              // زر Notifications
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => const NotificationsPage()),
+              );
+              break;
+            case 2:
+              // زر Favorites
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => const FavoritesPage()),
+              );
+              break;
+            case 3:
+              // زر Profile
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => ProfilePage()),
+              );
+              break;
+          }
+        },
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
             icon: Icon(Icons.home_outlined),
@@ -191,9 +224,6 @@ class BookingReviewPage extends StatelessWidget {
             label: 'Profile',
           ),
         ],
-        onTap: (index) {
-          _onItemTapped(context, index);
-        },
       ),
     );
   }

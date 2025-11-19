@@ -1,4 +1,6 @@
+// ==================== DateTimeSelectionPage ====================
 import 'package:flutter/material.dart';
+import 'package:final_project/screens/profile_page.dart';
 
 class DateTimeSelectionPage extends StatefulWidget {
   @override
@@ -6,15 +8,12 @@ class DateTimeSelectionPage extends StatefulWidget {
 }
 
 class _DateTimeSelectionPageState extends State<DateTimeSelectionPage> {
-  DateTime _selectedDate = DateTime.now();
-  TimeOfDay _selectedTime = TimeOfDay.now();
-
   final List<int> _days = List.generate(30, (index) => index + 1);
-  final int _currentMonthDay = 4;
-  final int _selectedDay = 22;
+  int? selectedStartDay;
+  int? selectedEndDay;
 
   @override
-  Widget build(BuildContext buildContext) {
+  Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.black,
       appBar: AppBar(
@@ -22,9 +21,7 @@ class _DateTimeSelectionPageState extends State<DateTimeSelectionPage> {
         elevation: 0,
         leading: IconButton(
           icon: Icon(Icons.arrow_back, color: Colors.white),
-          onPressed: () {
-            Navigator.pop(buildContext);
-          },
+          onPressed: () => Navigator.pop(context),
         ),
         title: Text(
           'Date & Time',
@@ -34,161 +31,161 @@ class _DateTimeSelectionPageState extends State<DateTimeSelectionPage> {
         actions: [
           Padding(
             padding: const EdgeInsets.only(right: 16.0),
-            child: Icon(Icons.person_outline, color: Colors.white),
+            child: GestureDetector(
+              child: Icon(Icons.person_outline, color: Colors.white),
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => ProfilePage()),
+                );
+              },
+            ),
           ),
         ],
-        bottom: PreferredSize(
-          preferredSize: Size.fromHeight(1.0),
-          child: Divider(
-            color: Colors.white.withOpacity(0.2),
-            height: 1.0,
-          ),
-        ),
       ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(16.0),
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Container(
-              padding: EdgeInsets.all(16),
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(10),
-              ),
-              child: Column(
-                children: [
-                  _buildMonthHeader(),
-                  SizedBox(height: 15),
-                  _buildWeekDays(),
-                  SizedBox(height: 10),
-                  _buildCalendarGrid(),
-                  SizedBox(height: 20),
-                  Divider(color: Colors.white.withOpacity(0.2)),
-                  SizedBox(height: 20),
-                  _buildTimePicker(),
-                ],
-              ),
-            ),
+            _buildCalendarBox(),
             SizedBox(height: 30),
-            Row(
-              children: [
-                Expanded(
-                  child: _buildInfoCard(
-                    context: buildContext,
-                    title: 'Delivery',
-                    date: 'June 23',
-                    time: '9 : 00 PM',
-                  ),
-                ),
-                SizedBox(width: 15),
-                Expanded(
-                  child: _buildInfoCard(
-                    context: buildContext,
-                    title: 'Receive',
-                    date: 'June 20',
-                    time: '11 : 00 AM',
-                  ),
-                ),
-              ],
-            ),
-            SizedBox(height: 50),
-            Center(
-              child: ElevatedButton(
-                onPressed: () {
-                  Navigator.pushNamed(buildContext, '/');
-                },
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Color(0xFF0083A7),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  padding: EdgeInsets.symmetric(horizontal: 100, vertical: 15),
-                ),
-                child: Text(
-                  'Applied',
-                  style: TextStyle(
-                    fontSize: 18,
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold,
-                  ),
+            _buildSelectedDates(),
+            SizedBox(height: 40),
+
+            // زر Apply
+            ElevatedButton(
+              onPressed: () {
+                if (selectedStartDay == null || selectedEndDay == null) {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(
+                        content:
+                            Text('Please select both start and end dates.')),
+                  );
+                  return;
+                }
+
+                DateTime start = DateTime(2020, 6, selectedStartDay!);
+                DateTime end = DateTime(2020, 6, selectedEndDay!);
+
+                Navigator.pop(context, {
+                  "start": start,
+                  "end": end,
+                });
+              },
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Color(0xFF0083A7),
+                padding: EdgeInsets.symmetric(horizontal: 100, vertical: 15),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10),
                 ),
               ),
-            ),
+              child: Text(
+                "Apply",
+                style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold),
+              ),
+            )
           ],
         ),
       ),
     );
   }
 
+  // --------------------- صندوق التقويم ---------------------
+  Widget _buildCalendarBox() {
+    return Container(
+      padding: EdgeInsets.all(16),
+      decoration: BoxDecoration(
+          color: Colors.white, borderRadius: BorderRadius.circular(12)),
+      child: Column(children: [
+        _buildMonthHeader(),
+        SizedBox(height: 12),
+        _buildWeekDays(),
+        SizedBox(height: 12),
+        _buildCalendarGrid(),
+      ]),
+    );
+  }
+
+  // --------------------- عنوان الشهر ---------------------
   Widget _buildMonthHeader() {
     return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Icon(Icons.arrow_back_ios, color: Colors.white.withOpacity(0.7), size: 16),
-        Row(
-          children: [
-            Text(
-              'June 2020',
-              style: TextStyle(
-                color: Colors.white,
-                fontSize: 18,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-            SizedBox(width: 8),
-            Icon(Icons.arrow_forward_ios, color: Colors.white.withOpacity(0.7), size: 16),
-          ],
+        Text(
+          "June 2020",
+          style: TextStyle(
+              color: Colors.black, fontSize: 20, fontWeight: FontWeight.bold),
         ),
-        Icon(Icons.arrow_forward_ios, color: Colors.white.withOpacity(0.7), size: 16),
       ],
     );
   }
 
+  // --------------------- أيام الأسبوع ---------------------
   Widget _buildWeekDays() {
-    final List<String> weekDays = ['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT'];
+    final List<String> days = ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"];
+
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceAround,
-      children: weekDays.map((day) => Text(day, style: TextStyle(color: Colors.black, fontSize: 12))).toList(),
+      children: days
+          .map((d) => Text(d,
+              style: TextStyle(
+                  color: Colors.black54, fontWeight: FontWeight.bold)))
+          .toList(),
     );
   }
 
+  // --------------------- التقويم ---------------------
   Widget _buildCalendarGrid() {
     return GridView.builder(
       shrinkWrap: true,
       physics: NeverScrollableScrollPhysics(),
-      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: 7,
-        childAspectRatio: 1.0,
-        mainAxisSpacing: 8,
-        crossAxisSpacing: 8,
-      ),
-      itemCount: 30 + 3,
+      gridDelegate:
+          SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 7),
+      itemCount: 30,
       itemBuilder: (context, index) {
-        if (index < 3) {
-          return Container();
-        }
-        final day = _days[index - 3];
-        bool isActiveDay = day == _currentMonthDay;
-        bool isSelectedDay = day == _selectedDay;
+        int day = index + 1;
+
+        bool isStart = selectedStartDay == day;
+        bool isEnd = selectedEndDay == day;
+        bool isBetween = selectedStartDay != null &&
+            selectedEndDay != null &&
+            day > selectedStartDay! &&
+            day < selectedEndDay!;
 
         return GestureDetector(
           onTap: () {
             setState(() {
+              if (selectedStartDay == null) {
+                selectedStartDay = day;
+              } else if (selectedEndDay == null && day > selectedStartDay!) {
+                selectedEndDay = day;
+              } else {
+                selectedStartDay = day;
+                selectedEndDay = null;
+              }
             });
           },
           child: Container(
-            alignment: Alignment.center,
+            margin: EdgeInsets.all(3),
             decoration: BoxDecoration(
-              color: isActiveDay ? Color(0xFF0083A7) : (isSelectedDay ? Color(0xFF0083A7).withOpacity(0.7) : Colors.transparent),
+              color: isStart || isEnd
+                  ? Color(0xFF0083A7)
+                  : isBetween
+                      ? Color(0xFF0083A7).withOpacity(0.4)
+                      : Colors.transparent,
               borderRadius: BorderRadius.circular(8),
-              border: isActiveDay || isSelectedDay ? null : Border.all(color: Colors.grey.withOpacity(0.3)),
+              border: Border.all(color: Colors.black26),
             ),
-            child: Text(
-              '$day',
-              style: TextStyle(
-                color: isActiveDay || isSelectedDay ? Colors.white : Colors.black,
-                fontWeight: FontWeight.bold,
+            child: Center(
+              child: Text(
+                "$day",
+                style: TextStyle(
+                  color: isStart || isEnd ? Colors.white : Colors.black,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
             ),
           ),
@@ -197,88 +194,41 @@ class _DateTimeSelectionPageState extends State<DateTimeSelectionPage> {
     );
   }
 
-  Widget _buildTimePicker() {
+  // --------------------- عرض التواريخ المختارة ---------------------
+  Widget _buildSelectedDates() {
     return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
-        Text(
-          'Time',
-          style: TextStyle(color: Colors.black, fontSize: 16),
+        _dateBox(
+          label: "Start",
+          value: selectedStartDay != null ? "June ${selectedStartDay!}" : "- -",
         ),
-        SizedBox(width: 20),
-        Container(
-          padding: EdgeInsets.symmetric(horizontal: 15, vertical: 10),
-          decoration: BoxDecoration(
-            color: Color(0xFFD9D9D9),
-            borderRadius: BorderRadius.circular(8),
-          ),
-          child: Text(
-            '11:38',
-            style: TextStyle(color: Colors.black, fontSize: 16, fontWeight: FontWeight.bold),
-          ),
+        _dateBox(
+          label: "End",
+          value: selectedEndDay != null ? "June ${selectedEndDay!}" : "- -",
         ),
-        SizedBox(width: 10),
-        _buildTimePeriodButton('AM', true),
-        SizedBox(width: 10),
-        _buildTimePeriodButton('PM', false),
       ],
     );
   }
 
-  Widget _buildTimePeriodButton(String text, bool isSelected) {
+  Widget _dateBox({required String label, required String value}) {
     return Container(
-      padding: EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+      padding: EdgeInsets.all(14),
+      width: 150,
       decoration: BoxDecoration(
-        color: isSelected ? Colors.white.withOpacity(0.2) : Color(0xFFD9D9D9),
-        borderRadius: BorderRadius.circular(8),
-      ),
-      child: Text(
-        text,
-        style: TextStyle(color: isSelected ? Colors.black : Colors.black, fontSize: 14),
-      ),
-    );
-  }
-
-  Widget _buildInfoCard({
-    required BuildContext context,
-    required String title,
-    required String date,
-    required String time,
-  }) {
-    return Container(
-      padding: EdgeInsets.all(15),
-      decoration: BoxDecoration(
-        color: Color(0xFFD9D9D9),
-        borderRadius: BorderRadius.circular(10),
-      ),
+          color: Color(0xFFD9D9D9), borderRadius: BorderRadius.circular(12)),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
-            title,
-            style: TextStyle(color: Colors.black, fontSize: 16),
-          ),
-          SizedBox(height: 5),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text(
-                date,
-                style: TextStyle(color: Colors.black, fontSize: 16, fontWeight: FontWeight.bold),
-              ),
-            ],
-          ),
-          SizedBox(height: 5),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text(
-                time,
-                style: TextStyle(color: Color(0xFF0083A7), fontSize: 16, fontWeight: FontWeight.bold),
-              ),
-              Icon(Icons.arrow_forward_ios, color: Colors.black.withOpacity(0.7), size: 14),
-            ],
-          ),
+          Text(label,
+              style:
+                  TextStyle(color: Colors.black87, fontWeight: FontWeight.bold)),
+          SizedBox(height: 6),
+          Text(value,
+              style: TextStyle(
+                  color: Color(0xFF0083A7),
+                  fontWeight: FontWeight.bold,
+                  fontSize: 18)),
         ],
       ),
     );

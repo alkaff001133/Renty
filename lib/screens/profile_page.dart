@@ -1,3 +1,6 @@
+import 'package:final_project/screens/favorites.dart';
+import 'package:final_project/screens/home_page.dart';
+import 'package:final_project/screens/notafcation.dart';
 import 'package:flutter/material.dart';
 
 class ProfilePage extends StatelessWidget {
@@ -155,7 +158,7 @@ class ProfilePage extends StatelessWidget {
               ClipRRect(
                 borderRadius: BorderRadius.circular(8),
                 child: Image.asset(
-                  'images/Cover 1.png',
+                  'assets/images/Cover 1.png',
                   width: 150,
                   height: 70,
                   fit: BoxFit.cover,
@@ -216,7 +219,7 @@ class ProfilePage extends StatelessWidget {
             alignment: Alignment.center,
             child: CircleAvatar(
               radius: 30,
-              backgroundImage: AssetImage('images/profile_pic.png'),
+              backgroundImage: AssetImage('assets/images/profile_pic.png'),
               backgroundColor: Colors.transparent,
             ),
           ),
@@ -316,6 +319,35 @@ class ProfilePage extends StatelessWidget {
         type: BottomNavigationBarType.fixed,
         backgroundColor: Colors.transparent,
         elevation: 0,
+        onTap: (value) {
+          switch(value) {
+            case 0:
+              // زر Home
+              Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(builder: (context) => const HomePage()),
+              );
+              break;
+            case 1:
+              // زر Notifications
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => const NotificationsPage()),
+              );
+              break;
+            case 2:
+              // زر Favorites
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => const FavoritesPage()),
+              );
+              break;
+            case 3:
+              break;
+          }
+        },
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
             icon: Icon(Icons.home_outlined),
@@ -334,26 +366,8 @@ class ProfilePage extends StatelessWidget {
             label: 'Profile',
           ),
         ],
-        onTap: (index) {
-          _onItemTapped(context, index);
-        },
       ),
     );
   }
 
-  void _onItemTapped(BuildContext context, int index) {
-    switch (index) {
-      case 0:
-        break;
-      case 1:
-        break;
-      case 2:
-        break;
-      case 3:
-        if (ModalRoute.of(context)?.settings.name != '/profile') {
-          Navigator.pushNamed(context, '/profile');
-        }
-        break;
-    }
-  }
 }

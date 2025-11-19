@@ -1,46 +1,51 @@
+import 'package:final_project/screens/favorites.dart';
+import 'package:final_project/screens/home_page.dart';
+import 'package:final_project/screens/notafcation.dart';
+import 'package:final_project/screens/payment_details_page.dart';
+import 'package:final_project/screens/profile_page.dart';
 import 'package:flutter/material.dart';
 
 class CarRentalSummaryPage extends StatelessWidget {
   @override
   Widget build(BuildContext buildContext) {
     return Scaffold(
-        backgroundColor: Color(0xFFD9D9D9),
-        appBar: AppBar(
-            backgroundColor: Colors.black,
-            elevation: 0,
-            leading: IconButton(
-              icon: Icon(Icons.arrow_back, color: Colors.white),
-              onPressed: () {
-                Navigator.pop(buildContext);
-              },
-            ),
-            title: Text(
-              'BMW',
-              style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
-            ),
-            centerTitle: true,
-            actions: [
-              IconButton(
-                icon: Icon(Icons.favorite_border, color: Colors.white),
-                onPressed: () {
-                  // TODO: Handle add to favorites. Will link to favorites page later.
-                  print('Add to Favorites tapped!');
-                },
-              ),
-              Padding(
-                padding: const EdgeInsets.only(right: 16.0),
-                child: Icon(Icons.person_outline, color: Colors.white),
-              ),
-            ],
-                    bottom: PreferredSize(
-                  preferredSize: Size.fromHeight(1.0),
-                  child: Divider(
-                color: Colors.white.withOpacity(0.2),
-                height: 1.0,
-              ),
-            ),
-    ),
-    body: Column(
+      backgroundColor: Color(0xFFD9D9D9),
+      appBar: AppBar(
+        backgroundColor: Colors.black,
+        elevation: 0,
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back, color: Colors.white),
+          onPressed: () {
+            Navigator.pop(buildContext);
+          },
+        ),
+        title: Text(
+          'BMW',
+          style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+        ),
+        centerTitle: true,
+        actions: [
+          IconButton(
+            icon: Icon(Icons.favorite_border, color: Colors.white),
+            onPressed: () {
+              Navigator.push(
+                buildContext,
+                MaterialPageRoute(
+                    builder: (context) => const FavoritesPage()),
+              );
+            },
+          ),
+          Padding(
+            padding: const EdgeInsets.only(right: 16.0),
+            child: GestureDetector(child: Icon(Icons.person_outline, color: Colors.white), onTap: ()=> Navigator.push(buildContext, MaterialPageRoute(builder: (context)=> ProfilePage())),),
+          ),
+        ],
+        bottom: PreferredSize(
+          preferredSize: Size.fromHeight(1.0),
+          child: Divider(color: Colors.white.withOpacity(0.2), height: 1.0),
+        ),
+      ),
+      body: Column(
         children: [
           Expanded(
             child: SingleChildScrollView(
@@ -65,16 +70,29 @@ class CarRentalSummaryPage extends StatelessWidget {
                               ),
                             ),
                             Container(
-                              padding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                              padding: EdgeInsets.symmetric(
+                                horizontal: 8,
+                                vertical: 4,
+                              ),
                               decoration: BoxDecoration(
                                 color: Colors.white.withOpacity(0.2),
                                 borderRadius: BorderRadius.circular(15),
                               ),
                               child: Row(
                                 children: [
-                                  Icon(Icons.star, color: Colors.white, size: 16),
+                                  Icon(
+                                    Icons.star,
+                                    color: Colors.white,
+                                    size: 16,
+                                  ),
                                   SizedBox(width: 4),
-                                  Text('5.0', style: TextStyle(color: Colors.white, fontSize: 12)),
+                                  Text(
+                                    '5.0',
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 12,
+                                    ),
+                                  ),
                                 ],
                               ),
                             ),
@@ -88,7 +106,7 @@ class CarRentalSummaryPage extends StatelessWidget {
                               child: ClipRRect(
                                 borderRadius: BorderRadius.circular(8),
                                 child: Image.asset(
-                                  'images/Mercedes.png',
+                                  'assets/images/Mercedes.png',
                                   height: 50,
                                   fit: BoxFit.cover,
                                 ),
@@ -153,13 +171,24 @@ class CarRentalSummaryPage extends StatelessWidget {
               SizedBox(width: 5),
               Text('Your trip', style: TextStyle(fontSize: 12)),
               Spacer(),
-              Text('Trip dates', style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold)),
+              Text(
+                'Trip dates',
+                style: TextStyle(
+                  fontSize: 12,
+                  color: Colors.black,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
             ],
           ),
           SizedBox(height: 5),
           Text(
             'الخميس 23 أكتوبر 10:00 ص',
-            style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold),
+            style: TextStyle(
+              fontSize: 12,
+              color: Colors.black,
+              fontWeight: FontWeight.bold,
+            ),
           ),
           Text(
             'الأحد 28 أكتوبر 10:00 ص',
@@ -170,12 +199,19 @@ class CarRentalSummaryPage extends StatelessWidget {
             children: [
               Icon(Icons.location_on, size: 16, color: Colors.grey[700]),
               SizedBox(width: 5),
-              Text('pickup & return location', style: TextStyle(fontSize: 12)),
+              Text(
+                'pickup & return location',
+                style: TextStyle(fontSize: 12, color: Colors.black),
+              ),
             ],
           ),
           Text(
             'Miami, FL 33123',
-            style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold),
+            style: TextStyle(
+              fontSize: 12,
+              color: Colors.black,
+              fontWeight: FontWeight.bold,
+            ),
           ),
         ],
       ),
@@ -207,10 +243,7 @@ class CarRentalSummaryPage extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Text(
-            '\$US 10',
-            style: TextStyle(color: Colors.green, fontSize: 16),
-          ),
+          Text('\$US 10', style: TextStyle(color: Colors.green, fontSize: 16)),
           Text(
             'day discount -3',
             style: TextStyle(color: Colors.black, fontSize: 14),
@@ -301,7 +334,10 @@ class CarRentalSummaryPage extends StatelessWidget {
           Expanded(
             child: ElevatedButton(
               onPressed: () {
-                Navigator.pushNamed(buildContext, '/paymentDetails');
+                Navigator.push(
+                  buildContext,
+                  MaterialPageRoute(builder: (context) => PaymentDetailsPage()),
+                );
               },
               style: ElevatedButton.styleFrom(
                 backgroundColor: Color(0xFF0083A7),
@@ -401,7 +437,36 @@ class CarRentalSummaryPage extends StatelessWidget {
         showUnselectedLabels: false,
         type: BottomNavigationBarType.fixed,
         backgroundColor: Colors.transparent,
-        elevation: 0,
+        elevation: 0,onTap: (value) {
+          switch(value) {
+            case 0:
+              Navigator.push(context, MaterialPageRoute(builder: (context)=> HomePage()));
+              break;
+            case 1:
+              // زر Notifications
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => const NotificationsPage()),
+              );
+              break;
+            case 2:
+              // زر Favorites
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => const FavoritesPage()),
+              );
+              break;
+            case 3:
+              // زر Profile
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => ProfilePage()),
+              );
+              break;
+          }
+        },
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
             icon: Icon(Icons.home_outlined),
@@ -420,9 +485,6 @@ class CarRentalSummaryPage extends StatelessWidget {
             label: 'Profile',
           ),
         ],
-        onTap: (index) {
-          _onItemTapped(context, index);
-        },
       ),
     );
   }
