@@ -64,7 +64,7 @@ class CarRentalSummaryPage extends StatelessWidget {
                             Text(
                               'BMW 8 Series Gran Coupe',
                               style: TextStyle(
-                                color: Colors.white,
+                                color: const Color.fromARGB(255, 0, 0, 0),
                                 fontSize: 18,
                                 fontWeight: FontWeight.bold,
                               ),
@@ -167,9 +167,9 @@ class CarRentalSummaryPage extends StatelessWidget {
         children: [
           Row(
             children: [
-              Icon(Icons.calendar_today, size: 16, color: Colors.grey[700]),
+              Icon(Icons.calendar_today, size: 16, color: const Color.fromARGB(255, 24, 167, 219)),
               SizedBox(width: 5),
-              Text('Your trip', style: TextStyle(fontSize: 12)),
+              Text('Your trip', style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold),),
               Spacer(),
               Text(
                 'Trip dates',
@@ -192,16 +192,16 @@ class CarRentalSummaryPage extends StatelessWidget {
           ),
           Text(
             'الأحد 28 أكتوبر 10:00 ص',
-            style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold),
+            style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold, color: Colors.black),
           ),
           Divider(height: 10, color: Colors.grey[300]),
           Row(
             children: [
-              Icon(Icons.location_on, size: 16, color: Colors.grey[700]),
+              Icon(Icons.location_on, size: 16, color: const Color.fromARGB(255, 12, 163, 193)),
               SizedBox(width: 5),
               Text(
                 'pickup & return location',
-                style: TextStyle(fontSize: 12, color: Colors.black),
+                style: TextStyle(fontSize: 12,fontWeight: FontWeight.bold,color: const Color.fromARGB(255, 10, 10, 10)),
               ),
             ],
           ),
@@ -210,7 +210,7 @@ class CarRentalSummaryPage extends StatelessWidget {
             style: TextStyle(
               fontSize: 12,
               color: Colors.black,
-              fontWeight: FontWeight.bold,
+              
             ),
           ),
         ],
@@ -277,7 +277,7 @@ class CarRentalSummaryPage extends StatelessWidget {
           SizedBox(height: 5),
           Text(
             'Full refund before Oct 22, 10:00 AM',
-            style: TextStyle(color: Colors.grey, fontSize: 14),
+            style: TextStyle(color: Colors.grey[600], fontSize: 14),
           ),
         ],
       ),
@@ -384,11 +384,11 @@ class CarRentalSummaryPage extends StatelessWidget {
               ),
               Text(
                 'Before taxes',
-                style: TextStyle(color: Colors.black, fontSize: 12),
+                style: TextStyle(color: Colors.black, fontSize: 12,fontWeight: FontWeight.bold),
               ),
               Text(
                 '\$0 due now',
-                style: TextStyle(color: Color(0xFF0083A7), fontSize: 12),
+                style: TextStyle(color: Color.fromARGB(255, 0, 255, 68), fontSize: 12),
               ),
             ],
           ),
@@ -436,7 +436,7 @@ class CarRentalSummaryPage extends StatelessWidget {
         showSelectedLabels: false,
         showUnselectedLabels: false,
         type: BottomNavigationBarType.fixed,
-        backgroundColor: Colors.transparent,
+        backgroundColor: const Color.fromARGB(0, 0, 0, 0),
         elevation: 0,onTap: (value) {
           switch(value) {
             case 0:

@@ -141,7 +141,7 @@ class PaymentDetailsPage extends StatelessWidget {
           ),
           child: TextField(
             keyboardType: keyboardType,
-            style: TextStyle(color: Colors.white),
+            style: TextStyle(color: const Color.fromARGB(255, 0, 0, 0),fontWeight: FontWeight.bold),
             decoration: InputDecoration(
               hintText: hintText,
               hintStyle: TextStyle(color: Colors.grey),
