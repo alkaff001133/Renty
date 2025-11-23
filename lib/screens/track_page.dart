@@ -115,10 +115,10 @@ class TrackPage extends StatelessWidget {
 }
 // بيانات الشاحنات
 const List<Map<String, String>> trucks = [
-  {"type": "Volvo Truck 2023", "price": "\$100.00/h", "image": "assets/images/Rectangle 127.png", "rating": "4.8"},
-  {"type": "MAN Truck 2022", "price": "\$95.00/h", "image": "assets/images/fh_truck.png", "rating": "4.7"},
-  {"type": "Scania Truck 2021", "price": "\$90.00/h", "image": "assets/images/Rectangle 127.png", "rating": "4.6"},
-  {"type": "Ford Truck 2020", "price": "\$85.00/h", "image": "assets/images/fh_truck.png", "rating": "4.5"},
+  {"type": "Volvo Truck 2023", "price": "\$100/h", "image": "assets/images/Rectangle 127.png", "rating": "4.8"},
+  {"type": "MAN Truck 2022", "price": "\$95/h", "image": "assets/images/fh_truck.png", "rating": "4.7"},
+  {"type": "Scania Truck 2021", "price": "\$90/h", "image": "assets/images/Rectangle 127.png", "rating": "4.6"},
+  {"type": "Ford Truck 2020", "price": "\$85/h", "image": "assets/images/fh_truck.png", "rating": "4.5"},
 ];
 
 class VehicleCard extends StatelessWidget {

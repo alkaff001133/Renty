@@ -6,6 +6,7 @@ import 'screens/splash_screen.dart';
 import 'utils/theme.dart';
 
 void main() {
+    WidgetsFlutterBinding.ensureInitialized();
   runApp(const MyApp());
 }
 

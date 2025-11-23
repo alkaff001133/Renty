@@ -30,7 +30,7 @@ class _NotificationsPageState extends State<NotificationsPage> {
     {
       'leadingIcon': Icons.check,
       'title': 'Booking confirmation',
-      'message': 'Your booking for Toyota confirmed from Oct 10 to Oct 12.',
+      'message': 'Your booking  from Oct 10 to Oct 12.',
       'timeAgo': '1h ago',
       'leadingIsCheck': true,
     },
@@ -44,14 +44,14 @@ class _NotificationsPageState extends State<NotificationsPage> {
     {
       'leadingIcon': Icons.error_outline,
       'title': 'The reservation period',
-      'message': 'Your booking for Hyundai. Please return or extend your booking.',
+      'message': 'Please return or extend your booking.',
       'timeAgo': '1h ago',
       'leadingIsCheck': false,
     },
     {
       'leadingIcon': Icons.check,
       'title': 'Booking confirmation',
-      'message': 'Your booking for Toyota Camry has been confirmed from Oct 10 to Oct 12.',
+      'message': 'Your booking from Oct 10 to Oct 12 ',
       'timeAgo': '1h ago',
       'leadingIsCheck': true,
     },

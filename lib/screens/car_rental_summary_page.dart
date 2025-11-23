@@ -183,7 +183,7 @@ class CarRentalSummaryPage extends StatelessWidget {
           ),
           SizedBox(height: 5),
           Text(
-            'الخميس 23 أكتوبر 10:00 ص',
+            'Saturday 28 OCT 10:00 AM',
             style: TextStyle(
               fontSize: 12,
               color: Colors.black,
@@ -191,7 +191,7 @@ class CarRentalSummaryPage extends StatelessWidget {
             ),
           ),
           Text(
-            'الأحد 28 أكتوبر 10:00 ص',
+            'Saturday 30 OCT 10:00 AM',
             style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold, color: Colors.black),
           ),
           Divider(height: 10, color: Colors.grey[300]),
@@ -210,7 +210,7 @@ class CarRentalSummaryPage extends StatelessWidget {
             style: TextStyle(
               fontSize: 12,
               color: Colors.black,
-              
+              fontWeight: FontWeight.bold
             ),
           ),
         ],
